@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Cube : MonoBehaviour {
 
@@ -8,7 +9,7 @@ public class Cube : MonoBehaviour {
 	void Start()
     {
         EventController.Subscribe(Consts.Events.events.myfirstEvent, Method);
-        
+       
     }
     
 
@@ -16,9 +17,13 @@ public class Cube : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.F))
             EventController.InvokeEvent(Consts.Events.events.myfirstEvent);
-
+        
 
     }
+
+
+
+    
 
     void Method () {
         Debug.Log("Method");

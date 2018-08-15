@@ -8,6 +8,8 @@ public class EventController {
 
     static Dictionary<Consts.Events.events, Action> Events = new Dictionary<Consts.Events.events, Action>();
     static event Action myFirstEvent;
+    static event Action flyToBoard;
+    static event Action startGame;
 
 
     public static void Subscribe(Consts.Events.events gameEvent, Action method)
@@ -20,6 +22,21 @@ public class EventController {
             myFirstEvent += method;
             Events.Add(gameEvent, method);
         }
+
+        if(gameEvent == Consts.Events.events.flyToBoard)
+        {
+            flyToBoard += method;
+            Events.Add(gameEvent, method);
+        }
+
+        if(gameEvent == Consts.Events.events.startGame)
+        {
+            startGame += method;
+            Events.Add(gameEvent, method);
+        }
+
+
+
     }
 
 
@@ -28,21 +45,18 @@ public class EventController {
         if (Events.ContainsKey(Consts.Events.events.myfirstEvent))
         {
 
-            if (eventParametr == Consts.Events.events.myfirstEvent)
+            if (eventParametr == Consts.Events.events.flyToBoard)
             {
-                myFirstEvent();
+                flyToBoard();
             }
+
+            if (eventParametr == Consts.Events.events.startGame)
+            {
+                startGame();
+            }
+
         }
     }
-
-    public void testMethod()
-    {
-        Debug.Log("Event Handler Method");
-    }
-
-    public void OthertestMethod()
-    {
-         EventController.Subscribe(Consts.Events.events.myfirstEvent, testMethod);
-       
-    }
+    
+   
 }
