@@ -34,9 +34,7 @@ public class EventController {
             startGame += method;
             Events.Add(gameEvent, method);
         }
-
-
-
+        
     }
 
 

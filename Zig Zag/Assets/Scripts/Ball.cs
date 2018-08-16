@@ -32,7 +32,18 @@ public class Ball : MonoBehaviour {
        
     }
 
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Trigger");
 
+        if(other.tag == "LeftStick" || other.tag == "RightStick")
+        {
+            isTurnedLeft = !isTurnedLeft;
+            Debug.Log("Touch Stick");
+            EventController.InvokeEvent(Consts.Events.events.flyToBoard);
+        }
+
+    }
 
     public void FlyToRight()
     {
