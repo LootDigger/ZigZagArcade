@@ -35,6 +35,12 @@ public class LeftStick : MonoBehaviour {
         if(isMoving)
         {
             Move(Consts.Coordinates.leftStickStartPosition, Consts.Coordinates.leftStickEndPosition);
+
+            if (Input.GetMouseButton(0))
+            {
+                isMoving = false;
+            }
+
         }
 		
 	}

@@ -36,6 +36,11 @@ public class RightStick : MonoBehaviour {
         if (isMoving)
         {
             Move(Consts.Coordinates.rightStickStartPosition, Consts.Coordinates.rightStickEndPosition);
+
+            if (Input.GetMouseButton(0))
+            {
+                isMoving = false;
+            }
         }
 
     }

@@ -47,12 +47,22 @@ public class Ball : MonoBehaviour {
 
     public void FlyToRight()
     {
-        EventController.InvokeEvent(Consts.Events.events.startLeftStick);
+        EventController.InvokeEvent(Consts.Events.events.startRightStick);
 
         float minYPos = transform.position.y;
         float yPos = Random.Range(minYPos, Consts.Coordinates.maxYPos);
         Vector3 flyEndPosition = new Vector3(Consts.Coordinates.maxXPosition, yPos, transform.position.z);
-        this.gameObject.transform.DOMove(flyEndPosition, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
+
+
+        Vector3 middlePos = flyEndPosition;
+
+        middlePos.x = flyEndPosition.x - transform.position.x;
+        middlePos.y = flyEndPosition.y - transform.position.y;
+        Debug.Log(middlePos);
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(this.gameObject.transform.DOMove((flyEndPosition), 2f, false));
+       // this.gameObject.transform.DOMove(flyEndPosition, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
         
     }
 
@@ -62,8 +72,25 @@ public class Ball : MonoBehaviour {
         EventController.InvokeEvent(Consts.Events.events.startLeftStick);
         float minYPos = transform.position.y;
         float yPos = Random.Range(minYPos, Consts.Coordinates.maxYPos);
+
         Vector3 flyEndPosition = new Vector3(Consts.Coordinates.minXPosition, yPos, transform.position.z);
-        this.gameObject.transform.DOMove(flyEndPosition, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
+        Debug.Log("End pos" + flyEndPosition);
+
+
+        Vector3 middlePos = flyEndPosition;
+        
+
+        middlePos.x = flyEndPosition.x - transform.position.x;
+        middlePos.y = flyEndPosition.y - transform.position.y;
+
+        middlePos.x /= 2f;
+        middlePos.y /= 2f;
+        Debug.Log("Middle pos" + middlePos);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(this.gameObject.transform.DOMove((middlePos), 3f, false));
+        seq.Append(this.gameObject.transform.DOMove((flyEndPosition), 1f, false));
+        //this.gameObject.transform.DOMove(middlePos, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
+
 
     }
 }

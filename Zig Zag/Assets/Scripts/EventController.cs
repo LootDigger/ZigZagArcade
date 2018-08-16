@@ -28,7 +28,6 @@ public class EventController {
 
         if(gameEvent == Consts.Events.events.startGame)
         {
-            Debug.Log("Subscribe to start game");
             startGame += method;
             Events.Add(gameEvent, method);
         }
