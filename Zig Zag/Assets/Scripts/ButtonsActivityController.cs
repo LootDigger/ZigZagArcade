@@ -7,6 +7,7 @@ public class ButtonsActivityController : MonoBehaviour {
 
     public void StartGame()
     {
+        Debug.Log("Invoke Start Game");
         EventController.InvokeEvent(Consts.Events.events.startGame);
     }
 }

@@ -7,9 +7,10 @@ public class EventController {
 
 
     static Dictionary<Consts.Events.events, Action> Events = new Dictionary<Consts.Events.events, Action>();
-    static event Action myFirstEvent;
     static event Action flyToBoard;
     static event Action startGame;
+    static event Action startLeftStick;
+    static event Action startRightStick;
 
 
     public static void Subscribe(Consts.Events.events gameEvent, Action method)
@@ -17,11 +18,7 @@ public class EventController {
         if (Events.ContainsKey(gameEvent) && Events.ContainsValue(method))
             return;            
 
-        if (gameEvent == Consts.Events.events.myfirstEvent)
-        {
-            myFirstEvent += method;
-            Events.Add(gameEvent, method);
-        }
+        
 
         if(gameEvent == Consts.Events.events.flyToBoard)
         {
@@ -31,17 +28,29 @@ public class EventController {
 
         if(gameEvent == Consts.Events.events.startGame)
         {
+            Debug.Log("Subscribe to start game");
             startGame += method;
             Events.Add(gameEvent, method);
         }
-        
+
+        if (gameEvent == Consts.Events.events.startLeftStick)
+        {
+            startLeftStick += method;
+            Events.Add(gameEvent, method);
+        }
+
+        if (gameEvent == Consts.Events.events.startRightStick)
+        {
+            startRightStick += method;
+            Events.Add(gameEvent, method);
+        }
+
     }
 
 
     public static void InvokeEvent(Consts.Events.events eventParametr)
     {
-        if (Events.ContainsKey(Consts.Events.events.myfirstEvent))
-        {
+        
 
             if (eventParametr == Consts.Events.events.flyToBoard)
             {
@@ -53,7 +62,18 @@ public class EventController {
                 startGame();
             }
 
-        }
+            if (eventParametr == Consts.Events.events.startLeftStick)
+            {
+                startLeftStick();
+            }
+
+            if (eventParametr == Consts.Events.events.startRightStick)
+            {
+                startRightStick();
+            }
+
+
+        
     }
     
    

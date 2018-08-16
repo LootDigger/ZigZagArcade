@@ -15,7 +15,9 @@ using System;
             {
                 myfirstEvent,
                 flyToBoard,
-                startGame
+                startGame,
+                startLeftStick,
+                startRightStick
         };
 
         }
@@ -24,9 +26,26 @@ using System;
         {
 
         public const float maxYPos = 9f;
-        public static  Vector3 ballStartPosition = new Vector3(0f, -9f, -601f);
+        public static Vector3 ballStartPosition = new Vector3(0f, -9f, -601f);
+
+        public static Vector3 leftStickStartPosition = new Vector3(-5.3f, -7.45f, -606);
+        public static Vector3 leftStickEndPosition = new Vector3(-5.3f, 7.45f, -606f);
+
+        public static Vector3 rightStickStartPosition = new Vector3(5.3f, -7.45f, -606f);
+        public static Vector3 rightStickEndPosition = new Vector3(5.3f, 7.45f, -606f);
+
         public static float minXPosition = -5.26f;
         public static float maxXPosition = 5.26f;
+
+
+    }
+
+
+    public static class Values
+    {
+        public static float stickSpeed = 5.0f;
+
+
 
     }
 

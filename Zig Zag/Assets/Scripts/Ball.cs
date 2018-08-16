@@ -47,15 +47,19 @@ public class Ball : MonoBehaviour {
 
     public void FlyToRight()
     {
+        EventController.InvokeEvent(Consts.Events.events.startLeftStick);
+
         float minYPos = transform.position.y;
         float yPos = Random.Range(minYPos, Consts.Coordinates.maxYPos);
         Vector3 flyEndPosition = new Vector3(Consts.Coordinates.maxXPosition, yPos, transform.position.z);
         this.gameObject.transform.DOMove(flyEndPosition, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
+        
     }
 
 
     public void FlyToLeft()
     {
+        EventController.InvokeEvent(Consts.Events.events.startLeftStick);
         float minYPos = transform.position.y;
         float yPos = Random.Range(minYPos, Consts.Coordinates.maxYPos);
         Vector3 flyEndPosition = new Vector3(Consts.Coordinates.minXPosition, yPos, transform.position.z);
