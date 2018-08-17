@@ -16,7 +16,7 @@ public class Ball : MonoBehaviour {
     void FlyToBoard()
     {
         Debug.Log("Fly!");
-
+        
         if (!isTurnedLeft)
         {
             Debug.Log("Right");
@@ -67,6 +67,27 @@ public class Ball : MonoBehaviour {
     }
 
 
+
+    Vector3 FindMiddlePoint(Vector2 start, Vector2 end)
+    {
+
+        Vector3 middlePoint;
+
+        middlePoint = (end - start);
+        Debug.Log("start = " + start);
+        Debug.Log("end = " + end);
+        Debug.Log("Разница векторов = " + middlePoint);
+
+        middlePoint /= 1.2f;
+        middlePoint.x = end.x - middlePoint.x;
+        middlePoint.y = end.y - middlePoint.y;
+
+        Debug.Log(" Средняя точка" + middlePoint);
+        middlePoint.z = Consts.Coordinates.zCoord;
+        return middlePoint;
+
+    }
+
     public void FlyToLeft()
     {
         EventController.InvokeEvent(Consts.Events.events.startLeftStick);
@@ -74,23 +95,12 @@ public class Ball : MonoBehaviour {
         float yPos = Random.Range(minYPos, Consts.Coordinates.maxYPos);
 
         Vector3 flyEndPosition = new Vector3(Consts.Coordinates.minXPosition, yPos, transform.position.z);
-        Debug.Log("End pos" + flyEndPosition);
+        Vector3 middlePos = FindMiddlePoint(transform.position, flyEndPosition);
 
 
-        Vector3 middlePos = flyEndPosition;
-        
-
-        middlePos.x = flyEndPosition.x - transform.position.x;
-        middlePos.y = flyEndPosition.y - transform.position.y;
-
-        middlePos.x /= 2f;
-        middlePos.y /= 2f;
-        Debug.Log("Middle pos" + middlePos);
+        Debug.Log("Middle point еще раз" + middlePos);
         Sequence seq = DOTween.Sequence();
-        seq.Append(this.gameObject.transform.DOMove((middlePos), 3f, false));
-        seq.Append(this.gameObject.transform.DOMove((flyEndPosition), 1f, false));
-        //this.gameObject.transform.DOMove(middlePos, 2f, false);//.SetEase(Ease.InOutExpo, 1f);
-
-
+        seq.Append(this.gameObject.transform.DOMove((middlePos), 1f, false));
+        seq.Append(this.gameObject.transform.DOMove((flyEndPosition), 0.5f, false));        
     }
 }

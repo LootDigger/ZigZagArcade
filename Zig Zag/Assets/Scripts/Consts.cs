@@ -36,6 +36,7 @@ using System;
 
         public static float minXPosition = -5.26f;
         public static float maxXPosition = 5.26f;
+        public static float zCoord = -606f;
 
 
     }
@@ -43,7 +44,7 @@ using System;
 
     public static class Values
     {
-        public static float stickSpeed = 5.0f;
+        public static float stickSpeed = 10f;
 
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RightStick : MonoBehaviour {
 
     private bool isMoving = false;
-
+    
 
     void Start()
     {
