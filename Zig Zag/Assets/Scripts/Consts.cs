@@ -14,10 +14,13 @@ using System;
             public enum events
             {
                 myfirstEvent,
-                flyToBoard,
+                jump,
                 startGame,
                 startLeftStick,
-                startRightStick
+                startRightStick,
+                lose,
+                letDown
+            
         };
 
         }
@@ -26,9 +29,9 @@ using System;
         {
 
         public const float maxYPos = 9f;
-        public static Vector3 ballStartPosition = new Vector3(0f, -9f, -601f);
+        public static Vector3 ballStartPosition = new Vector3(0f, 0f, -606f);
 
-        public static Vector3 leftStickStartPosition = new Vector3(-5.3f, -7.45f, -606);
+        public static Vector3 leftStickStartPosition = new Vector3(0f, -6.65f, -606);
         public static Vector3 leftStickEndPosition = new Vector3(-5.3f, 7.45f, -606f);
 
         public static Vector3 rightStickStartPosition = new Vector3(5.3f, -7.45f, -606f);
@@ -44,7 +47,9 @@ using System;
 
     public static class Values
     {
-        public static float stickSpeed = 10f;
+        
+
+        public static float stickSpeed = 50f;
 
 
 

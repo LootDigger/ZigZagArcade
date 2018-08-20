@@ -6,54 +6,93 @@ using System;
 public class EventController {
 
 
-    static Dictionary<Consts.Events.events, Action> Events = new Dictionary<Consts.Events.events, Action>();
-    static event Action flyToBoard;
+    static event Action jump;
     static event Action startGame;
     static event Action startLeftStick;
     static event Action startRightStick;
+    static event Action Lose;
+    static event Action letDown;
 
 
     public static void Subscribe(Consts.Events.events gameEvent, Action method)
     {
-        if (Events.ContainsKey(gameEvent) && Events.ContainsValue(method))
-            return;            
-
         
-
-        if(gameEvent == Consts.Events.events.flyToBoard)
+        if(gameEvent == Consts.Events.events.jump)
         {
-            flyToBoard += method;
-            Events.Add(gameEvent, method);
+            jump += method;
         }
 
         if(gameEvent == Consts.Events.events.startGame)
         {
             startGame += method;
-            Events.Add(gameEvent, method);
         }
 
         if (gameEvent == Consts.Events.events.startLeftStick)
         {
             startLeftStick += method;
-            Events.Add(gameEvent, method);
         }
 
         if (gameEvent == Consts.Events.events.startRightStick)
         {
             startRightStick += method;
-            Events.Add(gameEvent, method);
+        }
+
+        if(gameEvent == Consts.Events.events.lose)
+        {
+            Lose += method;
+        }
+
+
+        if (gameEvent == Consts.Events.events.letDown)
+        {
+            letDown += method;
         }
 
     }
 
+    public static void Unsubscribe(Consts.Events.events gameEvent, Action method)
+    {
+
+        if (gameEvent == Consts.Events.events.jump)
+        {
+            jump -= method;
+        }
+
+        if (gameEvent == Consts.Events.events.startGame)
+        {
+            startGame -= method;
+        }
+
+        if (gameEvent == Consts.Events.events.startLeftStick)
+        {
+            startLeftStick -= method;
+        }
+
+        if (gameEvent == Consts.Events.events.startRightStick)
+        {
+            startRightStick -= method;
+        }
+
+        if (gameEvent == Consts.Events.events.lose)
+        {
+            Lose -= method;
+        }
+
+
+        if (gameEvent == Consts.Events.events.letDown)
+        {
+            letDown -= method;
+        }
+
+    }
 
     public static void InvokeEvent(Consts.Events.events eventParametr)
     {
         
 
-            if (eventParametr == Consts.Events.events.flyToBoard)
+            if (eventParametr == Consts.Events.events.jump)
             {
-                flyToBoard();
+                jump();
             }
 
             if (eventParametr == Consts.Events.events.startGame)
@@ -71,8 +110,16 @@ public class EventController {
                 startRightStick();
             }
 
+            if(eventParametr == Consts.Events.events.lose)
+            {
+                Lose();
+            }
 
-        
+            if (eventParametr == Consts.Events.events.letDown)
+            {
+                letDown();
+            }
+
     }
     
    
