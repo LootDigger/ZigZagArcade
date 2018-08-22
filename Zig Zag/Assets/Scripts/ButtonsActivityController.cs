@@ -10,4 +10,10 @@ public class ButtonsActivityController : MonoBehaviour {
         Debug.Log("Invoke Start Game");
         EventController.InvokeEvent(Consts.Events.events.startGame);
     }
+
+
+    public void Replay()
+    {
+        EventController.InvokeEvent(Consts.Events.events.replay);
+    }
 }

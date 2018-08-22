@@ -5,42 +5,77 @@ using DG.Tweening;
 
 public class Stick : MonoBehaviour
 {
-    private bool isMovingStarted = false;
-    private Vector2 movementStartPos;
-    private Vector2 movementEndPos;
-    private float t = 0;
 
 
-    public void Start()
+    bool isDead;
+
+    void Start()
     {
+        
+        isDead = false;
+        EventController.Subscribe(Consts.Events.events.lose, Lose);
+        EventController.Subscribe(Consts.Events.events.replay, Replay);
     }
-    
 
-    public void startMoving( Vector2 startPos, Vector2 endPos)
+
+
+
+    void Lose()
     {
-        Debug.Log("Start moving");
-        movementStartPos = startPos;
-        movementEndPos = endPos;
+        Debug.Log("SetDead!");
+        isDead = true;
+    }
 
-        isMovingStarted = true;
-       // transform.DOMove(endPos, 3f);
+
+    void Replay()
+    {
+        Debug.Log("SetAlive!");
+        isDead = false;
     }
 
 
     void Update()
     {
 
-        Vector2.Lerp(transform.position, Consts.Coordinates.leftStickEndPosition, Time.deltaTime);
-        if(isMovingStarted)
+        Vector3 acceleration = Input.acceleration;
+
+        #if UNITY_EDITOR
+
+        if (!isDead)
         {
-            t += Time.deltaTime;
-            Debug.Log("t = " + t);
-           // Vector2.Lerp(movementStartPos, movementEndPos,t);
-           
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Clamp(pos.x, -4.3f, 4.3f);
+                pos.x -= 10f * Time.deltaTime;
+                transform.position = pos;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Clamp(pos.x, -4.3f, 4.3f);
+                pos.x += 10f * Time.deltaTime;
+                transform.position = pos;
+            }
+
+        }
+        #endif
+
+
+        #if UNITY_ANDROID
+
+        if (!isDead)
+        {
+
+            Vector3 position = transform.position;
+            position.x = Mathf.Clamp(position.x, -4.3f, 4.3f);
+            position.x += acceleration.x * Time.deltaTime * Consts.Values.stickSpeed;
+            transform.position = position;
         }
 
-
+        #endif
+      
     }
-
-
 }
+

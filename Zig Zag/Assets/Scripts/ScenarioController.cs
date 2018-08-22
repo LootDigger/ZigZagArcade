@@ -10,19 +10,18 @@ public class ScenarioController : MonoBehaviour {
     [SerializeField]
     private GameObject leftStick;
 
-    [SerializeField]
-    private GameObject rightStick;
-
+    
     [SerializeField]
     private GameObject Ball;
 
+
     [SerializeField]
-    private Text acceleration;
+    private GameObject gameOverMenu;
+
     #endregion
 
 
     #region Values
-   
 
 
     #endregion
@@ -31,7 +30,9 @@ public class ScenarioController : MonoBehaviour {
     void Start ()
     {
         EventController.Subscribe(Consts.Events.events.startGame, StartGame);
-        EventController.Subscribe(Consts.Events.events.lose, SpawnNewBall);
+        EventController.Subscribe(Consts.Events.events.lose, ShowGameOverScreen);
+        EventController.Subscribe(Consts.Events.events.replay, Replay);
+
 
     }
 
@@ -42,36 +43,40 @@ public class ScenarioController : MonoBehaviour {
     }
 
 
-
-    void LetDown()
+    void Replay()
     {
-        leftStick.transform.DOMove(Consts.Coordinates.leftStickStartPosition, 1f);
-        rightStick.transform.DOMove(Consts.Coordinates.rightStickStartPosition, 1f);
-        Ball.transform.DOMove(Consts.Coordinates.ballStartPosition, 1f);
-
+        
+        gameOverMenu.transform.DOMoveX(-15f, 1f);
+        leftStick.transform.position = Consts.Coordinates.leftStickStartPosition;
+        StartCoroutine(CountDown());
     }
+   
 
 
     void SpawnNewBall()
     {
         Instantiate(Ball, Consts.Coordinates.ballStartPosition, Quaternion.identity);
-        leftStick.transform.position = Consts.Coordinates.leftStickStartPosition;
+        
     }
 
 
+    void ShowGameOverScreen()
+    {
+        gameOverMenu.transform.DOMoveX(0, 1f);
+    }
     
+
+    IEnumerator CountDown()
+    {
+        
+        yield return new WaitForSeconds(1f);
+        SpawnNewBall();
+    }
 
 
 
     void Update ()
     {
-        if (Input.gyro.enabled)
-        {
-            acceleration.text = Input.gyro.rotationRate.ToString();
-        }
-        else
-        {
-            Input.gyro.enabled = true;
-        }
+        
 	}
 }

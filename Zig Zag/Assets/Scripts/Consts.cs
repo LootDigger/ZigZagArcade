@@ -19,7 +19,8 @@ using System;
                 startLeftStick,
                 startRightStick,
                 lose,
-                letDown
+                letDown,
+                replay
             
         };
 

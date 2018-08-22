@@ -12,6 +12,7 @@ public class EventController {
     static event Action startRightStick;
     static event Action Lose;
     static event Action letDown;
+    static event Action replay;
 
 
     public static void Subscribe(Consts.Events.events gameEvent, Action method)
@@ -48,6 +49,11 @@ public class EventController {
             letDown += method;
         }
 
+
+        if (gameEvent == Consts.Events.events.replay)
+        {
+            replay += method;
+        }
     }
 
     public static void Unsubscribe(Consts.Events.events gameEvent, Action method)
@@ -84,6 +90,11 @@ public class EventController {
             letDown -= method;
         }
 
+        if (gameEvent == Consts.Events.events.replay)
+        {
+            replay -= method;
+        }
+
     }
 
     public static void InvokeEvent(Consts.Events.events eventParametr)
@@ -118,6 +129,11 @@ public class EventController {
             if (eventParametr == Consts.Events.events.letDown)
             {
                 letDown();
+            }
+
+            if (eventParametr == Consts.Events.events.replay)
+            {
+                replay();
             }
 
     }
