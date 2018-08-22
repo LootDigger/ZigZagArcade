@@ -25,7 +25,6 @@ public class Ball : MonoBehaviour {
     public void Death()
     {
 
-        Debug.Log("Lose game");
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -34,7 +33,6 @@ public class Ball : MonoBehaviour {
         if(other.tag == "LeftStick" || other.tag == "RightStick")
         {
             isTurnedLeft = !isTurnedLeft;
-            Debug.Log("Touch Stick");
             EventController.InvokeEvent(Consts.Events.events.jump);
         }
 

@@ -22,14 +22,12 @@ public class Stick : MonoBehaviour
 
     void Lose()
     {
-        Debug.Log("SetDead!");
         isDead = true;
     }
 
 
     void Replay()
     {
-        Debug.Log("SetAlive!");
         isDead = false;
     }
 
