@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Stick : MonoBehaviour
 {
-
+    Touch touch;
 
     bool isDead;
 
@@ -39,8 +39,10 @@ public class Stick : MonoBehaviour
 
         #if UNITY_EDITOR
 
+       
         if (!isDead)
         {
+            
 
             if (Input.GetKey(KeyCode.A))
             {
@@ -58,22 +60,36 @@ public class Stick : MonoBehaviour
             }
 
         }
-        #endif
+#endif
 
 
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
+
+
+
 
         if (!isDead)
         {
 
-            Vector3 position = transform.position;
-            position.x = Mathf.Clamp(position.x, -4.3f, 4.3f);
-            position.x += acceleration.x * Time.deltaTime * Consts.Values.stickSpeed;
-            transform.position = position;
+            if (Input.GetMouseButton(0))
+            {
+
+                Vector3 tmpPos = transform.position;
+                Vector3 tmp;
+                tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                tmp = transform.position;
+                tmp.x = tmpPos.x;
+                transform.position = tmp;
+            }
+
+            //Vector3 position = transform.position;
+            //position.x = Mathf.Clamp(position.x, -4.3f, 4.3f);
+            //position.x += acceleration.x * Time.deltaTime * Consts.Values.stickSpeed;
+            //transform.position = position;
         }
 
-        #endif
-      
+#endif
+
     }
 }
 

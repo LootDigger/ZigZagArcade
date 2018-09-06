@@ -26,7 +26,9 @@ public class ScoreController : MonoBehaviour {
         EventController.Subscribe(Consts.Events.events.replay, Replay);
        
         mainScoreComponent.text = 0.ToString();
-	}
+        LoadBestResult();
+
+    }
 
     void IncreaseScore()
     {
@@ -64,6 +66,20 @@ public class ScoreController : MonoBehaviour {
     {
         score = 0;
         mainScoreComponent.text = score.ToString(); 
+    }
+
+
+    void LoadBestResult()
+    {
+        if (ES2.Exists("best.txt"))
+        {
+            bestScore = ES2.Load<int>("best.txt");
+            Debug.Log("Load result");
+        }
+        else
+            Debug.Log("Can't load best result");
+        bestResultScoreComponent.text = bestScore.ToString();
+
     }
 	
 }
